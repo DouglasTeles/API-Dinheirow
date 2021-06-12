@@ -22,6 +22,14 @@ module.exports = {
         type: Sequelize.STRING(30),
         allowNull:false
       },
+      bio:{
+        type: Sequelize.STRING(255),
+        allowNull:true
+      },
+      image:{
+        type: Sequelize.STRING(255),
+        allowNull:true
+      },      
       created_at:{
         type: Sequelize.DATE,
         allowNull:false

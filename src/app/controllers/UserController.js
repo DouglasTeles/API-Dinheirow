@@ -25,7 +25,8 @@ module.exports = {
             return res.status(404).json(err)
             
         }
-
+        
+            
     },
 
     async update(req, res){
@@ -40,8 +41,7 @@ module.exports = {
             where: {
                 id: user_id
             }
-        });
-
+        })
         return res.status(200).send({
             status: 1,
             message: "Usuário atualizado com sucesso!",

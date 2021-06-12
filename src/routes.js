@@ -8,9 +8,9 @@ router.get('/', (req, res) => {
 })
 
 const UserController = require('./app/controllers/UserController')
-router.post('/api/user',UserController.store)
-router.get('/api/user',UserController.index)
-router.put('/api/user/:user_id', UserController.update)
+router.post('/api/user',UserController.store) //cadastro usuario
+router.get('/api/user',UserController.index) //lista usuarios
+router.put('/api/user/:user_id', UserController.update) //atualiza usuario
 
 
 
