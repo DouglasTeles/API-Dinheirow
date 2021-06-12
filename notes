@@ -1,0 +1,16 @@
+Instalações necessarias
+npm install express --save
+npm install nodemon --save
+npm install sequelize --save
+npm install sequelize-cli --save
+npm install mysql2 --save
+
+
+Comandos sequelize-cli
+    Criar banco
+        npx sequelize db:create
+
+    Criar Migrations        
+        npx sequelize migration:create --name users
+    Criar Tabelas
+    npx sequelize db:migrate
