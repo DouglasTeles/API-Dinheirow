@@ -19,7 +19,7 @@ module.exports = {
         allowNull:false
       },      
       password:{
-        type: Sequelize.STRING(30),
+        type: Sequelize.STRING(255),
         allowNull:false
       },
       bio:{
@@ -29,7 +29,7 @@ module.exports = {
       image:{
         type: Sequelize.STRING(255),
         allowNull:true
-      },      
+      }, 
       created_at:{
         type: Sequelize.DATE,
         allowNull:false

@@ -1,56 +1,77 @@
+const bcryptHelper = require('../helpers/bcrypt/index')
+const bcrypt = require('bcryptjs')
 const User = require('../models/User')
 
 module.exports = {
+  async store(req, res) {
+    const bodyData = req.body;
+    const {username, email, password,bio, image} = bodyData
 
-    async store(req, res){
-        
-        const bodyData = req.body
+    try {
 
-        try {
-            
-            const newUser = await User.create(bodyData)
-            return res.status(200).json(newUser)
+      const hasUser = await User.findOne({ where: { email: email } })
+      if(hasUser) return res.status(400).json({message:"Email already exists"})
 
-        } catch (error) {
-            return res.status(404).json(error)
-        }
-    },
-    async index(req, res){
-        
-        try {
-            const users = await User.findAll()
-            return res.status(200).json(users)
-            
-        } catch (error) {
-            return res.status(404).json(err)
-            
-        }
-        
-            
-    },
+      const encryptedPassword = await bcryptHelper.encryptPassword(password)
 
-    async update(req, res){
-        
-        const { username, password, email } = req.body;
+      const newUser = await User.create({
+        username: username, 
+        email: email, 
+        password: encryptedPassword,
+        bio: bio,
+        image: image
+      });
+      
+      //Oculta a senha no retorno
+      
 
-        const { user_id } = req.params;
+      return res.status(200).json(newUser);
 
-         await User.update({
-            username, password, email
-        }, {
-            where: {
-                id: user_id
-            }
-        })
-        return res.status(200).send({
-            status: 1,
-            message: "Usuário atualizado com sucesso!",
-            username, password, email
-        });
-
-    },
-    async delete(req, res){
+    } catch (error) {
+      return res.status(404).json(error);
+    }
+  },
 
 
-    },
-}
+  async index(req, res) {
+
+    try {
+      const users = await User.findAll();
+
+      
+      return res.status(200).json({users});
+      
+
+    } catch (error) {
+      console.log(error);
+      return res.status(404).json(err);
+    }
+  },
+
+  async update(req, res) {
+    const { username, password, email } = req.body;
+
+    const { user_id } = req.params;
+
+    await User.update(
+      {
+        username,
+        password,
+        email,
+      },
+      {
+        where: {
+          id: user_id,
+        },
+      }
+    );
+    return res.status(200).send({
+      status: 1,
+      message: "Usuário atualizado com sucesso!",
+      username,
+      password,
+      email,
+    });
+  },
+  async delete(req, res) {},
+};

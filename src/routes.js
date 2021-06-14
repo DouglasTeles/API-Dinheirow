@@ -12,7 +12,9 @@ router.post('/api/user',UserController.store) //cadastro usuario
 router.get('/api/user',UserController.index) //lista usuarios
 router.put('/api/user/:user_id', UserController.update) //atualiza usuario
 
-
+//login
+const sessionController = require('./app/controllers/sessionController')
+router.post('/api/user/login',sessionController.create) //cadastro usuario
 
 
 
