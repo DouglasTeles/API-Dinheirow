@@ -51,28 +51,41 @@ module.exports = {
     
     const {username, password, email, bio, image} = req.body
     const {user_id} = req.params
-     
-        await User.update(
-      {
+    
+    const {payload} = req.user
+    const dataUser = payload.id
+    console.log(dataUser)
+    console.log(user_id)
+
+    if(dataUser ==user_id){
+      await User.update(
+        {
+          username,
+          password,
+          email,
+          bio,
+          image
+        },
+        {
+          where: {
+            id: user_id,
+          },
+        }
+      )
+      return res.status(200).json({
+        message:"Updated profile",
         username,
         password,
         email,
         bio,
         image
-      },
-      {
-        where: {
-          id: user_id,
-        },
-      }
-    )
-    return res.status(200).json({
-      username,
-      password,
-      email,
-      bio,
-      image
-    });
+      });
+
+    }else{
+      return res.status(400).json({message:"Not Allowed"})
+    }
+
+      
   },
   
 };
