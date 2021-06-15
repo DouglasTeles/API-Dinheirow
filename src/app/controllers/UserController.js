@@ -38,40 +38,41 @@ module.exports = {
     try {
       const users = await User.findAll();
 
-      
       return res.status(200).json({users});
       
 
     } catch (error) {
-      console.log(error);
+      
       return res.status(404).json(err);
     }
   },
 
   async update(req, res) {
-    const { username, password, email } = req.body;
-
-    const { user_id } = req.params;
-
-    await User.update(
+    
+    const {username, password, email, bio, image} = req.body
+    const {user_id} = req.params
+     
+        await User.update(
       {
         username,
         password,
         email,
+        bio,
+        image
       },
       {
         where: {
           id: user_id,
         },
       }
-    );
-    return res.status(200).send({
-      status: 1,
-      message: "Usuário atualizado com sucesso!",
+    )
+    return res.status(200).json({
       username,
       password,
       email,
+      bio,
+      image
     });
   },
-  async delete(req, res) {},
+  
 };

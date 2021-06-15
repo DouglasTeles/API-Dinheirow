@@ -7,12 +7,12 @@
      createToken(payload){
         
         const token = jwt.sign({ payload }, secretKey, { expiresIn: expirationTime })
-         return token
+        return token
      },
 
      verifyToken(token){
          const validToken = jwt.verify(token, secretKey)
-         console.log(validToken);
+         
          return validToken
     }
 
