@@ -1,20 +1,20 @@
-const express = require('express')
-const api = express()
-const routes = require('./routes')
-api.use(express.json())
+const express = require("express");
+const api = express();
+require("dotenv").config();
+const routes = require("./routes");
+const authenticate = require("./app/middleware/auth/index")
 
 
 
+api.use(express.json());
+
+require("./app/database");
 
 
-require('./app/database')
 
-api.use(routes)
+api.use(routes);
 
-
-const PORT = 3000
-api.listen(PORT, (req, res)=>{
-    console.log('API running port:', PORT)
-})
-
-
+const PORT = 3000;
+api.listen(PORT, (req, res) => {
+  console.log("API running port:", PORT);
+});

@@ -1,45 +1,51 @@
 const User = require('../models/User')
 const bcrypt = require('../helpers/bcrypt/index')
 
-module.exports ={
+const jwt = require("../helpers/jsonwebtoken/index");
 
-    async create(req, res){
+module.exports = {
 
-        const bodyData = req.body
-        const {email, password} = bodyData
+  async create(req, res) {
+    
+    const bodyData = req.body
+    const {email, password} = bodyData
+    console.log(email, password)
+    try {
+      
+      //verifica se o email existe
+      const hasUser = await User.findOne({ where: { email: email } });
+      
+      if (!hasUser) return res.status(404).json({ message: "User not found" });
+
+      const passwordDTO = {
+        requestPass: password,
+        responsePass: hasUser.password,
+      };
+
+      const validPassword = await bcrypt.decryptPassword(passwordDTO);
+      
+      
+      //verifica se a senha esta correta
+      if (!validPassword)
+        return res.status(400).json({ message: "Invalid password" });
         
-        //verifica se o email existe
-        try {
+      //importa o token do usuario
+      
+      const payload = {
+        email: hasUser.email,
+        id: hasUser.id,
+      };
+     
+      const token = jwt.createToken(payload);
 
-            const hasUser = await User.findOne({ where: { email: email } })
-
-            if (!hasUser) return res.status(404).json({message:"User not found"})
-
-            const passwordDTO = {
-                requestPass:password,
-                responsePass:hasUser.password
-                
-            }
-            
-            const validPassword = await bcrypt.decryptPassword(passwordDTO)
+      return res.status(200).json({ message: "Logged in", token });
 
 
-            if(!validPassword) return res.status(400).json({message:"Invalid password"})
-
-            return res.status(200).json({message:"Logged in"})
-
-        } catch (error) {
-            return res.status(400).json(error)
-        }
-
-        //verifica se a senha esta correta
-
-        
-
-
-        //gerar token
-
-
+    } catch (error) {
+      console.error(error)
+      return res.status(400).json(error);
     }
 
+  },
 }
+
