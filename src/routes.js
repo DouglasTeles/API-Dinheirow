@@ -17,9 +17,9 @@ router.put('/api/user/:user_id',authenticate.verifyToken,UserController.update) 
 const sessionController = require('./app/controllers/sessionController')
 router.post('/api/user/login',sessionController.create) //Login
 
-
-
-
+//Articles
+const ArticlesController = require('./app/controllers/ArticlesController')
+router.post('/api/articles/:user_id',ArticlesController.store) //cadastro usuario
 
 
 module.exports = router
