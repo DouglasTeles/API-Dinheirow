@@ -23,7 +23,12 @@ module.exports = {
       });
 
       //Oculta a senha no retorno
-      return res.status(200).json(newUser);
+      return res.status(200).json({
+        Username: newUser.username,
+        Email: newUser.email,
+        Bio: newUser.bio,
+        Image: newUser.image,
+      });
     } catch (error) {
       return res.status(404).json(error);
     }
@@ -46,35 +51,30 @@ module.exports = {
   async update(req, res) {
     const { username, password, email, bio, image } = req.body;
 
-    const { user_id } = req.params;
-    const { payload } = req.user;
-    const dataUser = payload.id;
+    const token = req.user;
+    const { payload } = token;
+    const user_id = payload.id;
 
-    if (dataUser == user_id) {
-      await User.update(
-        {
-          username,
-          password,
-          email,
-          bio,
-          image,
-        },
-        {
-          where: {
-            id: user_id,
-          },
-        }
-      );
-      return res.status(200).json({
-        message: "Updated profile",
+    await User.update(
+      {
         username,
         password,
         email,
         bio,
         image,
-      });
-    } else {
-      return res.status(400).json({ message: "Not Allowed" });
-    }
+      },
+      {
+        where: {
+          id: user_id,
+        },
+      }
+    );
+    return res.status(200).json({
+      username,
+      password,
+      email,
+      bio,
+      image,
+    });
   },
-};
+}; 

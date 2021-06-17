@@ -6,7 +6,13 @@ module.exports = {
     const token = req.user;
     const { payload } = token;
     const user_id = payload.id;
-    console.log(user_id);
+
+    const dataUser = await User.findByPk(user_id);
+    const dataAuthor = {
+      Author: dataUser.username,
+      Bio: dataUser.bio,
+      Imagem: dataUser.image,
+    };
 
     const bodyData = req.body;
     const {
@@ -30,32 +36,36 @@ module.exports = {
         favorites_count,
         user_id,
       });
-      return res.status(200).json(newArticle);
+      return res.status(200).json({ Aticle: newArticle, Author: dataAuthor });
     } catch (error) {
       return res.status(404).json(error);
     }
   },
 
   async index(req, res) {
-    const author = req.params
-    
+    const {author} = req.params    
     try {
 
-      // if(author !== null){
-      //   const articles = await Articles.findAll({where: {},
-      //     order: [["created_at", "DESC"]],
-      //   });
-  
-      //   return res.status(200).json(articles);
-      // }
-
-      const articles = await Articles.findAll({
-        order: [["created_at", "DESC"]],
-      });
-
-      return res.status(200).json(articles);
+      if (author == undefined) { 
+        const articles = await Articles.findAll({
+          order: [["created_at", "DESC"]],
+        });
+        return res.status(200).json(articles);
+        
+      }else{
+        const user = await User.findOne({where:{username: author}})
+        const articles = await Articles.findAll({where:{user_id:user.id}})
+        return res.status(200).json(articles);
+      } 
+      
     } catch (error) {
-      return res.status(404).json(err);
+      return res.status(400).json({message:"User not found"});
     }
-  },
-};
+
+
+
+    
+    
+  }
+}
+

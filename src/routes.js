@@ -12,7 +12,7 @@ const UserController = require('./app/controllers/UserController')
 router.post('/api/users',UserController.store) //cadastro usuario
 router.get('/api/profiles/:username',UserController.index) //lista usuario especifico
 
-router.put('/api/user/:user_id',authenticate.verifyToken,UserController.update) //atualiza usuario
+router.put('/api/user/',authenticate.verifyToken,UserController.update) //atualizar usuario
 
 
 //login

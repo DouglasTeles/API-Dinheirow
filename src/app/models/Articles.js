@@ -15,8 +15,7 @@ class Articles extends Model {
         })        
     }
         static associate(models){
-        this.belongsTo(models.User, {foreignKey: 'user_id', as:'writer'}),
-        this.belongsTo(models.User, {foreignKey: 'username', as:'author'})
+        this.belongsTo(models.User, {foreignKey: 'user_id', as:'writer'})
         }
     
 }
