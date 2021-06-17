@@ -7,7 +7,7 @@ module.exports = {
   async create(req, res) {
     const bodyData = req.body;
     const { email, password } = bodyData;
-   
+
     try {
       //verifica se o email existe
       const hasUser = await User.findOne({ where: { email: email } });
@@ -39,26 +39,18 @@ module.exports = {
       return res.status(400).json(error);
     }
   },
+  
   async index(req, res) {
+    const token = req.user;
+    const { payload } = token;
+    const email = payload.email;
 
-      const token = req.user
-      const {payload} = token
-      const email = payload.email
-      
-      try {
-
-
-        
+    try {
       const user = await User.findOne({ where: { email: email } });
-      
-      
-      
+
       return res.status(200).json({ user });
-      } catch (error) {
-        return res.status(404).json(err);
-      }
-    
-
-  }
-
+    } catch (error) {
+      return res.status(404).json(err);
+    }
+  },
 };

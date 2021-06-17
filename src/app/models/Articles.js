@@ -14,9 +14,10 @@ class Articles extends Model {
             sequelize
         })        
     }
-        // static associate(models){
-        // this.belongsTo(models.User, {foreignKey: 'user_id', as:'user'})
-        // }
+        static associate(models){
+        this.belongsTo(models.User, {foreignKey: 'user_id', as:'writer'}),
+        this.belongsTo(models.User, {foreignKey: 'username', as:'author'})
+        }
     
 }
 module.exports = Articles
