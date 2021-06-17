@@ -10,7 +10,6 @@ class Articles extends Model {
             tag_list: DataTypes.STRING,
             favorited: DataTypes.BOOLEAN,
             favorites_count: DataTypes.INTEGER,
-            user_id: DataTypes.INTEGER,
         },{
             sequelize
         })        

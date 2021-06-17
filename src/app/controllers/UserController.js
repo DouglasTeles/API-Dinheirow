@@ -7,7 +7,6 @@ module.exports = {
     const bodyData = req.body;
     const { username, email, password, bio, image } = bodyData;
 
-
     try {
       const hasUser = await User.findOne({ where: { email: email } });
       if (hasUser)
@@ -21,7 +20,7 @@ module.exports = {
         password: encryptedPassword,
         bio: bio,
         image: image,
-      })
+      });
 
       //Oculta a senha no retorno
       return res.status(200).json(newUser);
@@ -32,7 +31,11 @@ module.exports = {
 
   async index(req, res) {
     try {
-      const users = await User.findAll();
+      const { username } = req.params;
+
+      const users = await User.findOne({ where: { username: username } });
+      if (users == null)
+        return res.status(400).json({ message: "User not found" });
 
       return res.status(200).json({ users });
     } catch (error) {
@@ -74,4 +77,4 @@ module.exports = {
       return res.status(400).json({ message: "Not Allowed" });
     }
   },
-}
+};
