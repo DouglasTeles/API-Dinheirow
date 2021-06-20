@@ -43,7 +43,7 @@ module.exports = {
   },
 
   async index(req, res) {
-    const {author} = req.params    
+    const {author} = req.query    
     try {
 
       if (author == undefined) { 
@@ -59,6 +59,7 @@ module.exports = {
       } 
       
     } catch (error) {
+      console.log(error)
       return res.status(400).json({message:"User not found"});
     }
 
@@ -68,4 +69,3 @@ module.exports = {
     
   }
 }
-

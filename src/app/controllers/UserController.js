@@ -47,6 +47,7 @@ module.exports = {
       return res.status(404).json(err);
     }
   },
+  
 
   async update(req, res) {
     const { username, password, email, bio, image } = req.body;

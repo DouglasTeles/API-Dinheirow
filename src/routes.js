@@ -23,6 +23,10 @@ router.get('/api/user',authenticate.verifyToken,sessionController.index)//obtem 
 //Articles
 const ArticlesController = require('./app/controllers/ArticlesController')
 router.post('/api/articles',authenticate.verifyToken,ArticlesController.store) //cadastro Artigo
-router.get('/api/articles/:author?',ArticlesController.index)//listar artigos com ou sem parametro
+router.get('/api/articles',ArticlesController.index)//listar artigos com ou sem parametro
+
+//Follows
+const FollowsController = require('./app/controllers/FollowController')
+router.post('/api/profiles/:username/follow',authenticate.verifyToken,FollowsController.store)
 
 module.exports = router
