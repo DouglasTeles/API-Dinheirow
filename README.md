@@ -46,15 +46,6 @@ Observações: Não criei uma tabela para os dados slug, então todos os slugs d
 Para a execução da API é necessario ter o MySql instalado localmente. <br>
 Basta instalar e definir a senha de acesso root como "admin123", caso crie uma senha diferente será necessario modificar o arquivo de configuração que estáem src>>app>>config
 
-### Dependencias necessarias 
-* npm install express --save
-* npm install nodemon --save
-* npm install sequelize --save
-* npm install sequelize-cli --save
-* npm install mysql2 --save
-* npm install bcryptjs --save
-* npm install jsonwebtoken --save
-* npm install dotenv --save
 
 ## Comandos para criar o banco e executar migrations
      Criar banco
