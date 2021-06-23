@@ -1,10 +1,13 @@
-<h1> API-Dinheirow</h1>
+# API-Dinheirow
 
-API de cadastros de artigos, onde os usuários podem se seguir e comentar as publicações;
+### API de cadastros de artigos, onde os usuários podem se seguir e comentar as publicações.
 
-API desenvolvida em NodeJs utilizando express;
-MySql como banco de dados e Sequelize como ORM;
-bcryptjs para criptografia de senhas;
+## tecnologias utilizadas
+     Nodejs
+    Express
+    Sequelize
+    MySql
+    
 
 
 ### Recursos disponiveis (Usuários)
