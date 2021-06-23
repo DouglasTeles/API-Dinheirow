@@ -3,7 +3,7 @@
 ### API de cadastros de artigos, onde os usuários podem se seguir e comentar as publicações.
 
 ## tecnologias utilizadas
-     Nodejs
+    Nodejs
     Express
     Sequelize
     MySql
