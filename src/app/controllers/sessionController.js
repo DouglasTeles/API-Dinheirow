@@ -46,7 +46,14 @@ module.exports = {
     const email = payload.email;
 
     try {
-      const user = await User.findOne({ where: { email: email } });
+      const hasUser = await User.findOne({ where: { email: email } });
+      const user = {
+        id: hasUser.id,
+        user:hasUser.username,
+        email:hasUser.email,
+        bio:hasUser.bio,
+        image:hasUser.image
+      }
       return res.status(200).json({ user });
 
     } catch (error) {

@@ -7,13 +7,14 @@ module.exports = {
     const bodyData = req.body;
     const { username, email, password, bio, image } = bodyData;
 
-    try {
+    try {//verifica se o email já é cadastrado
       const hasUser = await User.findOne({ where: { email: email } });
       if (hasUser)
         return res.status(403).json({ message: "Email already exists" });
 
+    
+      //Oculta a senha no retorno
       const encryptedPassword = await bcryptHelper.encryptPassword(password);
-
       const newUser = await User.create({
         username: username,
         email: email,
@@ -22,7 +23,7 @@ module.exports = {
         image: image,
       });
 
-      //Oculta a senha no retorno
+      
       return res.status(200).json({
         Username: newUser.username,
         Email: newUser.email,
@@ -38,11 +39,18 @@ module.exports = {
     try {
       const { username } = req.params;
 
-      const users = await User.findOne({ where: { username: username } });
-      if (users == null)
+      const hasUsers = await User.findOne({ where: { username: username } });
+      const user = {
+        id: hasUsers.id,
+        user:hasUsers.username,
+        email:hasUsers.email,
+        bio:hasUsers.bio,
+        image:hasUsers.image
+      }
+      if (hasUsers == null)
         return res.status(404).json({ message: "User not found" });
 
-      return res.status(200).json({ users });
+      return res.status(200).json({ user });
     } catch (error) {
       return res.status(400).json(err);
     }

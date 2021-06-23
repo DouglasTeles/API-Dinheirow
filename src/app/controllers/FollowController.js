@@ -8,8 +8,15 @@ module.exports = {
 
     try {
       //Busca usuario passado por parametro
-      const user = await User.findOne({ where: { username: username } }) 
-      if (!user) {
+      const hasUser = await User.findOne({ where: { username: username } }) 
+      const user = {
+        id: hasUser.id,
+        user:hasUser.username,
+        email:hasUser.email,
+        bio:hasUser.bio,
+        image:hasUser.image
+      }
+      if (!hasUser) {
         return res.status(404).json({ message: "User not found" })
       }
 
@@ -30,7 +37,7 @@ module.exports = {
 
       //Se não cria o follow
       const newfollow = await Follows.create({
-        follow_id: user.id,
+        follow_id: hasUser.id,
         follower_id: payload.id,
       })
       return res.status(200).json({ message: "Following", user })
@@ -47,8 +54,15 @@ module.exports = {
     
     try {
       //Busca usuario passado por parametro
-      const user = await User.findOne({ where: { username: username } }) 
-      if (!user) {
+      const hasUser = await User.findOne({ where: { username: username } }) 
+      const user = {
+        id: hasUser.id,
+        user:hasUser.username,
+        email:hasUser.email,
+        bio:hasUser.bio,
+        image:hasUser.image
+      }
+      if (!hasUser) {
         return res.status(404).json({ message: "User not found" })
       }
       
@@ -61,7 +75,7 @@ module.exports = {
       {return res.status(404).json({ message:"User not found!"})}
       
 
-      const follow = await Follows.destroy({
+      const deletFollow = await Follows.destroy({
         where: { follower_id: payload.id, follow_id: user.id },
       })
       return res.status(200).json({ message: "You stopped following this user!", user})
