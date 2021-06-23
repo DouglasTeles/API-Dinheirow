@@ -1,6 +1,6 @@
 # API-Dinheirow
 
-### API de cadastros de artigos, onde os usuários podem se seguir e comentar as publicações.
+### API de cadastros de artigos, onde os usuários podem seguir outros usuários e comentar publicações
 
 ## tecnologias utilizadas
     Nodejs
