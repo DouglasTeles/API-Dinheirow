@@ -43,7 +43,7 @@
 Observações: Não criei uma tabela para os dados slug, então todos os slugs devem ser inseridos via body como string comum.
 
 ## REQUISITOS
-Para a execução da API é necessario ter o MySqlworkbench instalado local. <br>
+Para a execução da API é necessario ter o MySql instalado localmente. <br>
 Basta instalar e definir a senha de acesso root como "admin123", caso crie uma senha diferente será necessario modificar o arquivo de configuração que estáem src>>app>>config
 
 ### Dependencias necessarias 
@@ -67,3 +67,5 @@ Basta instalar e definir a senha de acesso root como "admin123", caso crie uma s
 
 ### Considerações <br/>
 Por ser o meu primeiro projeto 'completo' utilizando sequelize e um banco SQL, encontrei algumas dificuldades no decorrer do desenvolvimento. E mesmo não tendo concluido 100%, fiquei muito feliz com os conhecimentos que consegui assimilar enquanto trabalhei no projeto.
+
+
