@@ -65,6 +65,10 @@ Basta instalar e definir a senha de acesso root como "admin123", caso crie uma s
 
 <h5> Após esses passos basta rodar o comando 'npm run dev'</h5>
 
+## Diagrama API
+![relacionamentos](https://user-images.githubusercontent.com/78126649/123156767-10377f00-d440-11eb-9bfe-d0995a97482a.PNG)
+
+
 ### Considerações <br/>
 Por ser o meu primeiro projeto 'completo' utilizando sequelize e um banco SQL, encontrei algumas dificuldades no decorrer do desenvolvimento. E mesmo não tendo concluido 100%, fiquei muito feliz com os conhecimentos que consegui assimilar enquanto trabalhei no projeto.
 
