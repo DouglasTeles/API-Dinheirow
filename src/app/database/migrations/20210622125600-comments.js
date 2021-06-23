@@ -2,27 +2,31 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('followers', {
+    await queryInterface.createTable('comments', {
     id:{
       type: Sequelize.INTEGER,
       primaryKey:true,
       autoIncrement:true,
       allowNull:false
     },
-    follow_id:{
+    comment:{
+      type: Sequelize.STRING(300),
+      allowNull:false
+    },
+    user_id:{
       type: Sequelize.INTEGER,
       allowNull:false, 
       references:{model:'users', key:'id'}, 
       onUpdate: 'CASCADE',
-      ondDelete: 'CASCADE',
+      ondDelete: 'CASCADE', 
     },
-    follower_id:{
+    article_id:{
       type: Sequelize.INTEGER,
-      allowNull:false,
-      references:{model:'users', key:'id'}, 
+      allowNull:false, 
+      references:{model:'articles', key:'id'}, 
       onUpdate: 'CASCADE',
-      ondDelete: 'CASCADE',
-    },
+      ondDelete: 'CASCADE', 
+    },  
     created_at:{
       type: Sequelize.DATE,
       allowNull:false
@@ -34,7 +38,7 @@ module.exports = {
   })
   down: async (queryInterface, Sequelize) => {
     
-    await queryInterface.dropTable('followers');
+    await queryInterface.dropTable('comments');
     
   }
   }

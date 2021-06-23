@@ -5,7 +5,7 @@ module.exports = {
     const { token } = req.headers
 
     if (!token || token == null || token == undefined)
-      return res.status(400).json({ message: "Token invalid" });
+      return res.status(401).json({ message: "Token invalid" });
 
 
     //trata error de token para não crachar aplicação

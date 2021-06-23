@@ -10,7 +10,7 @@ module.exports = {
     try {
       const hasUser = await User.findOne({ where: { email: email } });
       if (hasUser)
-        return res.status(400).json({ message: "Email already exists" });
+        return res.status(403).json({ message: "Email already exists" });
 
       const encryptedPassword = await bcryptHelper.encryptPassword(password);
 
@@ -30,7 +30,7 @@ module.exports = {
         Image: newUser.image,
       });
     } catch (error) {
-      return res.status(404).json(error);
+      return res.status(400).json(error);
     }
   },
 
@@ -40,11 +40,11 @@ module.exports = {
 
       const users = await User.findOne({ where: { username: username } });
       if (users == null)
-        return res.status(400).json({ message: "User not found" });
+        return res.status(404).json({ message: "User not found" });
 
       return res.status(200).json({ users });
     } catch (error) {
-      return res.status(404).json(err);
+      return res.status(400).json(err);
     }
   },
   

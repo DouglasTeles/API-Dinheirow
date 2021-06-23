@@ -23,7 +23,7 @@ module.exports = {
 
       //verifica se a senha esta correta
       if (!validPassword)
-        return res.status(400).json({ message: "Invalid password" });
+        return res.status(404).json({ message: "Invalid password" });
 
       //importa o token do usuario
       const payload = {
@@ -32,8 +32,8 @@ module.exports = {
       };
 
       const token = jwt.createToken(payload);
-
       return res.status(200).json({ message: "Logged in", token });
+
     } catch (error) {
       console.error(error);
       return res.status(400).json(error);
@@ -47,10 +47,10 @@ module.exports = {
 
     try {
       const user = await User.findOne({ where: { email: email } });
-
       return res.status(200).json({ user });
+
     } catch (error) {
-      return res.status(404).json(err);
+      return res.status(400).json(err);
     }
   },
 };

@@ -1,16 +1,15 @@
 const {Model, DataTypes} = require('sequelize')
 
-class Favoriteds extends Model {
+class Tags extends Model {
     static init(sequelize) {
         super.init({
-           
+            tagname:DataTypes.STRING
         },{
             sequelize
         })        
     }
     static associate(models){
-        //this.hasMany(models.Articles, {foreignKey: 'article_id', as:'favorited'})
+        this.belongsToMany(models.Articles, {foreignKey: 'tag_id', through:'articles_tags', as: 'nameTags'})
     }
-    
 }
-module.exports = Favoriteds
+module.exports = Tags

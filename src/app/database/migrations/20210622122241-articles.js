@@ -28,7 +28,7 @@ module.exports = {
       },
       tag_list:{
         type: Sequelize.STRING(100),
-        allowNull:true
+        allowNull:false
       },
       favorited:{
         type: Sequelize.BOOLEAN(false),

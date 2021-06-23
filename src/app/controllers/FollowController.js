@@ -7,10 +7,10 @@ module.exports = {
     const { username } = req.params;
 
     try {
-      //Busca o ID do usuario passado por parametro
+      //Busca usuario passado por parametro
       const user = await User.findOne({ where: { username: username } }) 
       if (!user) {
-        return res.status(200).json({ message: "User not found" })
+        return res.status(404).json({ message: "User not found" })
       }
 
       //Busca na tabela de Follows se existe algum usuario seguindo o ID passado por parametro
@@ -20,14 +20,12 @@ module.exports = {
 
       //Verifica se usuario esta tentando seguir ele mesmo
       if (user.id == payload.id) {
-        return res.status(200).json({ message: "Impossible follow this user" })
+        return res.status(403).json({ message: "Impossible follow this user!" })
       }
 
       //Verifica se o ID do parametro já estiver sendo seguido pelo usuario
       if (follow) {
-        return res
-          .status(200)
-          .json({ message: "You already follow this user" })
+        return res.status(403).json({ message: "You already follow this user!" })
       }
 
       //Se não cria o follow
@@ -41,4 +39,38 @@ module.exports = {
       return res.status(400).json(error)
     }
   },
+
+  async delete(req, res) {
+
+    const { payload } = req.user;
+    const {username} = req.params 
+    
+    try {
+      //Busca usuario passado por parametro
+      const user = await User.findOne({ where: { username: username } }) 
+      if (!user) {
+        return res.status(404).json({ message: "User not found" })
+      }
+      
+      //Verifica se segue o usuario passado por parametro
+      const hasFollow = await Follows.findOne({
+        where: { follower_id: payload.id, follow_id: user.id },
+      })
+      
+      if(!hasFollow)
+      {return res.status(404).json({ message:"User not found!"})}
+      
+
+      const follow = await Follows.destroy({
+        where: { follower_id: payload.id, follow_id: user.id },
+      })
+      return res.status(200).json({ message: "You stopped following this user!", user})
+
+    } catch (error) {
+      return res.status(400).json(error)
+
+    }
+
+  }
+
 };
