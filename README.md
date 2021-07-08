@@ -61,6 +61,6 @@ Basta instalar e definir a senha de acesso root como "admin123", caso crie uma s
 
 
 ### Considerações <br/>
-Por ser o meu primeiro projeto 'completo' utilizando sequelize e um banco SQL, encontrei algumas dificuldades no decorrer do desenvolvimento. E mesmo não tendo concluido 100%, com certeza a melhor parte foi os conhecimentos que consegui assimilar durante o projeto.
+Por ser o meu primeiro projeto 'completo' utilizando sequelize e um banco SQL, encontrei algumas dificuldades no decorrer do desenvolvimento. E mesmo possuindo funções para ainda implementar, com certeza a melhor parte foi os conhecimentos que consegui assimilar durante o projeto.
 
 
