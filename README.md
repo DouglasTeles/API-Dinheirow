@@ -33,7 +33,7 @@
     Listar comentários em um artigo
     Deletar comentarios em um artigo
 
-### Funções não implementadas :( 
+### Funções para implementadas :( 
     Listar os artigos com os parametros das TAGS
     Deletar artigos
     Atualizar artigos
